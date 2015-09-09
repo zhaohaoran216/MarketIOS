@@ -31,8 +31,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     //设置导航栏的背景颜色和字体颜色
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor orangeColor]];
-//    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,nil]];
+    self.navigationController.navigationBar.barTintColor = [UIColor orangeColor];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     [self connectBackGround];
 
  }

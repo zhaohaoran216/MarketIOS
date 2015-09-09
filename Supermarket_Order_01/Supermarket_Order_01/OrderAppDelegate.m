@@ -58,8 +58,9 @@
     self.rootViewController = [[RootViewController alloc]init];
     self.naviController_sup = [[UINavigationController alloc]initWithRootViewController:self.rootViewController];
     self.naviController_sup.navigationBar.barTintColor = [UIColor colorWithRed:225.0/255.0 green:117.0/255.0 blue:68.0/255.0 alpha:1.0];
-    [self.naviController_sup.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,nil]];
+    self.naviController_order.navigationBar.tintColor = [UIColor whiteColor];
     self.rootViewController.title = @"超  市";
+    
     
 //    UIImage* sup_selected = [UIImage imageNamed:@"sup_selected.png"];
 //    UIImage* sup_noselected = [UIImage imageNamed:@"sup_noselected.png"];
@@ -74,7 +75,8 @@
     self.viewController = [[OrderTableViewController alloc]init];
     self.naviController_order = [[UINavigationController alloc]initWithRootViewController:self.viewController];
     self.naviController_order.navigationBar.barTintColor = [UIColor colorWithRed:225.0/255.0 green:117.0/255.0 blue:68.0/255.0 alpha:1.0];
-    [self.naviController_order.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,nil]];
+    self.naviController_order.navigationBar.barTintColor = [UIColor orangeColor];
+    self.naviController_order.navigationBar.tintColor = [UIColor whiteColor];
     self.viewController.title = @"订  单";
     
 //    UIImage* order_selected = [UIImage imageNamed:@"order_selected"];

@@ -11,6 +11,7 @@
 #import "Header.h"
 #import "MorCommentVC.h"
 #import "AFtools.h"
+#import "UIImageView+WebCache.h"
 @interface MarketDetailVC ()<UITableViewDataSource>
     
 @property (strong,nonatomic)UIImageView *marketImage;
@@ -114,6 +115,7 @@
     [AFtools JSONDataWithUrl:url parameters:nil HttpHeader:nil success:^(id responseObject){
         NSLog(@"%@",responseObject);
         self.dic = responseObject;
+        [_marketImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",_dic[@"icon"]]] ];
         [self reloadTextData];
            } fail:^{
         NSLog(@"error");

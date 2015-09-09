@@ -70,12 +70,21 @@
     //点击“是”放弃付款返回上一页面并取消该订单（用户自己取消）
     if (buttonIndex) {
         deleteOrderURL = [NSString stringWithFormat:@"http://115.29.197.143:8999/v1.0/user/order/%d",self.order_id];
-        [delegate.manager DELETE:deleteOrderURL parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-            NSLog(@"拒绝支付,取消订单成功！");
-            [self.navigationController popViewControllerAnimated:self];
-        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        [delegate.manager DELETE:deleteOrderURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"拒绝支付,取消订单成功！");
+                        [self.navigationController popViewControllerAnimated:self];
+
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"拒绝支付，取消订单失败!%@",error);
         }];
+//        [delegate.manager DELETE:deleteOrderURL parameters:nil
+//                         success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//            NSLog(@"拒绝支付,取消订单成功！");
+//            [self.navigationController popViewControllerAnimated:self];
+//        }
+//                         failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+//            NSLog(@"拒绝支付，取消订单失败!%@",error);
+//        }];
     }
 }
 
@@ -303,17 +312,31 @@
         [NSString stringWithFormat:@"http://115.29.197.143:8999/v1.0/order/%d",self.order_id];
         NSString* payURL2 = @"/pay";
         NSString* payURL = [payURL1 stringByAppendingString:payURL2];
-        [delegate.manager POST:payURL parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//
+        
+        [delegate.manager POST:payURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             delegate.orderID = self.order_id;
-            detailedOrderStatusTableViewController* detailView = [[detailedOrderStatusTableViewController alloc]init];
-            //下一页返回按钮返回订单首页
-//            UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"详情"  style:UIBarButtonItemStylePlain  target:self  action:@selector(detailBack)];
-//            self.navigationController.navigationBar.topItem.leftBarButtonItem = backButton;
-            [self.navigationController pushViewController:detailView animated:YES];
-            
-        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                        detailedOrderStatusTableViewController* detailView = [[detailedOrderStatusTableViewController alloc]init];
+                        //下一页返回按钮返回订单首页
+                        //            UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"详情"  style:UIBarButtonItemStylePlain  target:self  action:@selector(detailBack)];
+                        //            self.navigationController.navigationBar.topItem.leftBarButtonItem = backButton;
+                        [self.navigationController pushViewController:detailView animated:YES];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"支付失败:%@",error);
+
         }];
+        
+//        [delegate.manager POST:payURL parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//            delegate.orderID = self.order_id;
+//            detailedOrderStatusTableViewController* detailView = [[detailedOrderStatusTableViewController alloc]init];
+//            //下一页返回按钮返回订单首页
+//            //            UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"详情"  style:UIBarButtonItemStylePlain  target:self  action:@selector(detailBack)];
+//            //            self.navigationController.navigationBar.topItem.leftBarButtonItem = backButton;
+//            [self.navigationController pushViewController:detailView animated:YES];
+//            
+//        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+//            NSLog(@"支付失败:%@",error);
+//        }];
     }else{
         [warning show];
     }
